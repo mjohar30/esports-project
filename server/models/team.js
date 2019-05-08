@@ -23,7 +23,7 @@ const teamSchema = mongoose.Schema({
         type: String,
         maxlength: 400
     },
-    socialnetwork: [{
+    socialnetwork: {
         twitch: {
             type: String
         },
@@ -42,7 +42,7 @@ const teamSchema = mongoose.Schema({
         facebook: {
             type: String
         },
-    }],
+    },
     players: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
