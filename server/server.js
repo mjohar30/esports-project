@@ -13,7 +13,25 @@ app.use(express.json())
 
 require('dotenv').config()
 
+app.post('/users/register', (req,res) => {
+    const user = new User(req.body)
+    user.save((err) => {
+        if (err) return res.json({success: false, err})
+        res.status(200).json({
+            success: true
+        })
+    })
+})
 
+app.post('/teams/register', (req,res) => {
+    const team = new Team(req.body)
+    team.save((err) => {
+        if (err) return res.json({success: false, err})
+        res.status(200).json({
+            success: true
+        })
+    })
+})
 
 mongoose.connect(process.env.DATABASE, {useNewUrlParser: true}, (err) => {
     if (err) return err
