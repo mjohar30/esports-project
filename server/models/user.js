@@ -41,6 +41,18 @@ const userSchema = mongoose.Schema({
             unique: 1
         },
     }],
+
+    // gamedata: [{
+    //     datagame: {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Datagame'
+    //     },
+    //     gamertag: {
+    //         type: String,
+    //         unique: 1
+    //     },
+    // }]
+
     team: {
         type: Schema.Types.ObjectId,
         ref: 'Team'
