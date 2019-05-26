@@ -106,13 +106,50 @@ app.get('/users/logout', auth, (req, res) => {
         }
     )
 })
-app.post('/teams/register', (req,res) => {
+//**TEAMS
+//Registro
+app.post('/teams/register', (req, res) => {
     const team = new Team(req.body)
     team.save((err) => {
-        if (err) return res.json({success: false, err})
+        if(err) return res.json({success: false, err})
         res.status(200).json({
             success: true
         })
+    })
+})
+//Traer todos los equipos
+app.get('/teams', (req,res) =>{
+    Team
+    .find({})
+    .populate('players', 'name')
+    .populate("datagame.game", "name")
+    .populate("plays.game", "name")
+    .exec((err, docs)=> {
+        if(err) return res.json({success: false, err})
+        res.status(200).send(docs)
+    })
+})
+//Buscar euipo por id
+app.get('/teams/teams_by_id', ( req, res ) => {
+    let type = req.query.type
+    let teams = req.query.id
+    
+    if(type === "array"){
+        let ids = teams.split(',')
+        teams = []
+        teams = ids.map(team => { 
+            // Convertirlos en ObjectId de Mongoose
+            return mongoose.Types.ObjectId(team)
+        })
+    }
+    Team
+    .find({ '_id': {$in:teams}})
+    .populate('players', 'name')
+    .populate("datagame.game", "name")
+    .populate("plays.game", "name")
+    .exec((err, docs)=> {
+        if(err) return res.json({success: false, err})
+        res.status(200).send(docs)
     })
 })
 
