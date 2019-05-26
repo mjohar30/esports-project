@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const teamSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 100
     },
     country: {
         type: String,
@@ -15,8 +16,7 @@ const teamSchema = mongoose.Schema({
             ref: 'Game'
         },
         platform: {
-            type: Array,
-            default:[]
+            type: String
         }
     }],
     description: {
@@ -45,7 +45,8 @@ const teamSchema = mongoose.Schema({
     },
     players: [{
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        unique: 1
     }],
     plays: [{
         game: {

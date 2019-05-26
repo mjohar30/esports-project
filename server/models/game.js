@@ -1,5 +1,4 @@
-mongoose = require('mongoose')
-Schema = mongoose.Schema
+const mongoose = require('mongoose')
 
 const gameSchema = mongoose.Schema({
     name: {
@@ -7,16 +6,11 @@ const gameSchema = mongoose.Schema({
         required: true,
         maxlength: 100
     },
-    platform: {
-        type: Schema.Types.ObjectId,
-        ref: 'Platform'
-    },
     images: {
         type: Array,
         default: []
-    }
+    },
 })
 
 const Game = mongoose.model('Game', gameSchema, "games")
-
 module.exports = { Game }
