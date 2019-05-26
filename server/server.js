@@ -152,6 +152,44 @@ app.get('/teams/teams_by_id', ( req, res ) => {
         res.status(200).send(docs)
     })
 })
+//**GAMES
+//Registrar juego
+app.post('/games/register', auth, admin, (req, res) => {
+    const game = new Game(req.body)
+    game.save((err) => {
+        if(err) return res.json({success: false, err})
+        res.status(200).json({
+            success: true
+        })
+    })
+})
+//Traer todos los juegos
+app.get('/games', (req, res) => {
+    Game.find({}, (err, games) => {
+        if(err) return res.status(400).send(err)
+        res.status(200).send(games)
+    }) 
+})
+//Buscar juego por id
+app.get('/games/games_by_id', ( req, res ) => {
+    let type = req.query.type
+    let games = req.query.id
+    
+    if(type === "array"){
+        let ids = games.split(',')
+        games = []
+        games = ids.map(game => { 
+            // Convertirlos en ObjectId de Mongoose
+            return mongoose.Types.ObjectId(game)
+        })
+    }
+    Game
+    .find({ '_id': {$in:games}})
+    .exec((err, docs)=> {
+        if(err) return res.json({success: false, err})
+        res.status(200).send(docs)
+    })
+})
 
 mongoose.connect(process.env.DATABASE, {useNewUrlParser: true}, (err) => {
     if (err) return err
