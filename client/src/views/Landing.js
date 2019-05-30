@@ -4,6 +4,7 @@ import Card from '../components/Cards'
 import {Row, Col, Jumbotron, Button} from 'reactstrap'
 import './Landing.css'
 import { FaUser, FaUsers, FaBriefcase} from "react-icons/fa";
+import overwatch from '../overwatch.png'
 
 
 class Landing extends Component {
@@ -25,7 +26,7 @@ class Landing extends Component {
         <Row>
           <Col sm="4">
             <Card icon={<FaUser/>}  title="Los mejores jugadores" text="Revisa sus estadísticas, su información personal 
-            y su disponiblidad" button="Checar"> <FaUsers></FaUsers> hols </Card>
+            y su disponiblidad" button="Checar"> </Card>
           </Col>
           <Col sm="4">
             <Card icon={<FaUsers/>} title="Los mejores equipos" text="Sus logros y sus participantes estarán a la vista de todos." button="Checar"></Card>
@@ -33,6 +34,13 @@ class Landing extends Component {
           <Col sm="4">
             <Card icon={<FaBriefcase/>} title="Ofertas de empleo" text="Ya sea para un torneo casual o profesional, podrás encontrar 
             los mejores aliados" button="Próximamente"></Card>
+          </Col>
+        </Row>
+        <br></br>
+        <Row>
+          <Col>
+            <Card icon2={<img className="overwatch" src={overwatch} title="Overwatch"></img>}  title="¡No te preocupes!" 
+                button="Próximamente" text="Nosotros obtendremos tus estadísticas de los siguientes juegos" ><img src={overwatch} title="Overwatch"></img> </Card>
           </Col>
         </Row>
       </div>

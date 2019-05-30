@@ -17,6 +17,9 @@ class Cards extends Component {
           <CardText>{this.props.text}</CardText>
           <Button>{this.props.button}</Button>
         </CardBody>
+        <div className="iconlogo">
+          {this.props.icon2}
+        </div>
       </Card>
     </div>
   );
